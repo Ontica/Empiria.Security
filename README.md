@@ -1,5 +1,9 @@
 ﻿# Empiria Security Services
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/0fe29ee363034555aa79c7bc8e9f4011)](https://app.codacy.com/gh/Ontica/Empiria.Security/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+&nbsp; &nbsp; 
+[![Maintainability](https://api.codeclimate.com/v1/badges/39af548a3599b0d1fab6/maintainability)](https://codeclimate.com/github/Ontica/Empiria.Security/maintainability)
+
 This repository contains domain components, application services (uses cases),
 and web APIs interfaces used to interact and to provide Empiria security services.
 

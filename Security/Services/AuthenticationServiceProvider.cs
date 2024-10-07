@@ -2,7 +2,7 @@
 *                                                                                                            *
 *  Module   : Security Items                               Component : Services                              *
 *  Assembly : Empiria.Security.dll                         Pattern   : Service provider                      *
-*  Type     : AuthenticationService                        License   : Please read LICENSE.txt file          *
+*  Type     : AuthenticationServiceProvider                License   : Please read LICENSE.txt file          *
 *                                                                                                            *
 *  Summary  : Provides user authentication services.                                                         *
 *                                                                                                            *
@@ -20,7 +20,7 @@ using Empiria.Security.Subjects;
 namespace Empiria.Security.Services {
 
   /// <summary>Provides user authentication services.</summary>
-  public class AuthenticationService: IAuthenticationProvider {
+  internal class AuthenticationServiceProvider: IAuthenticationProvider {
 
     #region Services
 
@@ -112,7 +112,7 @@ namespace Empiria.Security.Services {
     }
 
 
-    internal Claim GetSubjectAuthenticationClaim(string userID, string password, string entropy) {
+    public Claim GetSubjectAuthenticationClaim(string userID, string password, string entropy) {
       Assertion.Require(userID, nameof(userID));
       Assertion.Require(password, nameof(password));
       Assertion.Require(entropy, nameof(entropy));
@@ -219,6 +219,6 @@ namespace Empiria.Security.Services {
 
     #endregion Helpers
 
-  }  // class AuthenticationService
+  }  // class AuthenticationServiceProvider
 
 }  // namespace Empiria.Security.Services

@@ -300,7 +300,7 @@ namespace Empiria.Security {
 
       internal SecurityObjects(EmpiriaPrincipal principal) {
 
-        var service = new Services.AuthorizationService();
+        var service = new Services.AuthorizationServiceProvider();
 
         this.Roles = service.GetRoles(principal.Identity, principal.ClientApp);
 

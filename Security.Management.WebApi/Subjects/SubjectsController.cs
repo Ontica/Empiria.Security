@@ -24,6 +24,7 @@ namespace Empiria.Security.Management.WebApi {
 
     [HttpPost, AllowAnonymous]
     [Route("v4/onepoint/security/management/new-credentials-token")]
+    [Route("v5/security/management/new-credentials-token")]
     public SingleObjectModel GenerateNewCredentialsToken([FromBody] UserCredentialsDto credentials) {
 
       PrepareAuthenticationFields(credentials);
@@ -38,6 +39,7 @@ namespace Empiria.Security.Management.WebApi {
 
     [HttpPost]
     [Route("v4/onepoint/security/management/subjects/search")]
+    [Route("v5/security/management/subjects/search")]
     public CollectionModel GetSubjects([FromBody] SubjectsQuery query) {
 
       RequireBody(query);
@@ -52,6 +54,7 @@ namespace Empiria.Security.Management.WebApi {
 
     [HttpGet]
     [Route("v4/onepoint/security/management/subjects/workareas")]
+    [Route("v5/security/management/subjects/workareas")]
     public CollectionModel GetWorkareas() {
 
       using (var usecases = SubjectUseCases.UseCaseInteractor()) {

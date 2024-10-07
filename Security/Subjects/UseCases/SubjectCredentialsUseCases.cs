@@ -74,7 +74,7 @@ namespace Empiria.Security.Subjects.UseCases {
 
       fields.EnsureValid();
 
-      var service = new Services.AuthenticationService();
+      var service = new Services.AuthenticationServiceProvider();
 
       service.AuthenticateClientApp(fields.AppKey);
 

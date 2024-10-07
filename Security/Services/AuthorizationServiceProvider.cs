@@ -2,7 +2,7 @@
 *                                                                                                            *
 *  Module   : Security                                     Component : Authorization services                *
 *  Assembly : Empiria.Security.dll                         Pattern   : Service provider                      *
-*  Type     : AuthorizationService                         License   : Please read LICENSE.txt file          *
+*  Type     : AuthorizationServiceProvider                 License   : Please read LICENSE.txt file          *
 *                                                                                                            *
 *  Summary  : Provides subject's authorization services.                                                     *
 *                                                                                                            *
@@ -15,9 +15,9 @@ using Empiria.Security.SecurityItems.Adapters;
 namespace Empiria.Security.Services {
 
   /// <summary>Provides subject's authorization services.</summary>
-  public class AuthorizationService : IAuthorizationProvider {
+  internal class AuthorizationServiceProvider : IAuthorizationProvider {
 
-    internal FixedList<string> GetFeaturesPermissions(EmpiriaIdentity subject,
+    public FixedList<string> GetFeaturesPermissions(EmpiriaIdentity subject,
                                                       IClientApplication clientApp) {
       Assertion.Require(subject, nameof(subject));
       Assertion.Require(clientApp, nameof(clientApp));
@@ -32,7 +32,7 @@ namespace Empiria.Security.Services {
     }
 
 
-    internal FixedList<IObjectAccessRule> GetObjectAccessRules(EmpiriaIdentity subject,
+    public FixedList<IObjectAccessRule> GetObjectAccessRules(EmpiriaIdentity subject,
                                                                IClientApplication clientApp) {
       Assertion.Require(subject, nameof(subject));
       Assertion.Require(clientApp, nameof(clientApp));
@@ -47,7 +47,7 @@ namespace Empiria.Security.Services {
     }
 
 
-    internal FixedList<string> GetRoles(EmpiriaIdentity subject,
+    public FixedList<string> GetRoles(EmpiriaIdentity subject,
                                         IClientApplication clientApp) {
       Assertion.Require(subject, nameof(subject));
       Assertion.Require(clientApp, nameof(clientApp));
@@ -74,11 +74,9 @@ namespace Empiria.Security.Services {
 
     #region Helpers
 
-
     private SecurityContext DetermineSecurityContext(IClientApplication clientApp) {
       return SecurityContext.ParseWith(clientApp);
     }
-
 
     private IObjectAccessRule MapToObjectAccessRulesDto(ObjectAccessRule rule) {
       return new ObjectAccessRuleDto {
@@ -90,6 +88,6 @@ namespace Empiria.Security.Services {
 
     #endregion Helpers
 
-  }  // class AuthorizationService
+  }  // class AuthorizationServiceProvider
 
 }  // namespace Empiria.Security.Services

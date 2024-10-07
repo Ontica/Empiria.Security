@@ -2,7 +2,7 @@
 *                                                                                                            *
 *  Module   : Security                                     Component : Authorization services                *
 *  Assembly : Empiria.Security.dll                         Pattern   : Service provider                      *
-*  Type     : CryptoService                                License   : Please read LICENSE.txt file          *
+*  Type     : CryptoServiceProvider                        License   : Please read LICENSE.txt file          *
 *                                                                                                            *
 *  Summary  : Provides subject's authorization services.                                                     *
 *                                                                                                            *
@@ -16,9 +16,11 @@ using Empiria.Security.Providers;
 namespace Empiria.Security.Services {
 
   /// <summary>Provides subject's authorization services.</summary>
-  public class CryptoService : ICryptoServiceProvider {
+  internal class CryptoServiceProvider : ICryptoServiceProvider {
 
-    public RSACryptoServiceProvider GetRSAProvider(string privateKeyFilePath, SecureString password) {
+    public RSACryptoServiceProvider GetRSAProvider(string privateKeyFilePath,
+                                                     SecureString password) {
+
       Assertion.Require(privateKeyFilePath, nameof(privateKeyFilePath));
       Assertion.Require(password, nameof(password));
 
@@ -30,6 +32,6 @@ namespace Empiria.Security.Services {
       return RSAProvider.GetSystemProvider();
     }
 
-  }  // class CryptoService
+  }  // class CryptoServiceProvider
 
 }  // namespace Empiria.Security.Services
