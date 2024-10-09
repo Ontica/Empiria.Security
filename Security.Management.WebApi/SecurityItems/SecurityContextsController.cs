@@ -23,7 +23,6 @@ namespace Empiria.Security.Management.WebApi {
     #region Web Apis
 
     [HttpGet]
-    [Route("v4/onepoint/security/management/contexts")]
     [Route("v5/security/management/contexts")]
     public CollectionModel GetSecurityContextsList() {
 
@@ -37,7 +36,6 @@ namespace Empiria.Security.Management.WebApi {
 
 
     [HttpGet]
-    [Route("v4/onepoint/security/management/contexts/{contextUID:guid}/roles")]
     [Route("v5/security/management/contexts/{contextUID:guid}/roles")]
     public CollectionModel GetSecurityContextRoles([FromUri] string contextUID) {
 
@@ -51,7 +49,6 @@ namespace Empiria.Security.Management.WebApi {
 
 
     [HttpGet]
-    [Route("v4/onepoint/security/management/contexts/{contextUID:guid}/features")]
     [Route("v5/security/management/contexts/{contextUID:guid}/features")]
     public CollectionModel GetSecurityContextFeatures([FromUri] string contextUID) {
 

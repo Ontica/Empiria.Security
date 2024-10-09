@@ -22,7 +22,6 @@ namespace Empiria.Security.Management.WebApi {
     #region Query apis
 
     [HttpGet]
-    [Route("v4/onepoint/security/management/subjects/{subjectUID:guid}/contexts")]
     [Route("v5/security/management/subjects/{subjectUID:guid}/contexts")]
     public CollectionModel GetSubjectContexts([FromUri] string subjectUID) {
 
@@ -36,7 +35,6 @@ namespace Empiria.Security.Management.WebApi {
 
 
     [HttpGet]
-    [Route("v4/onepoint/security/management/subjects/{subjectUID:guid}/contexts/{contextUID:guid}/features")]
     [Route("v5/security/management/subjects/{subjectUID:guid}/contexts/{contextUID:guid}/features")]
     public CollectionModel GetSubjectFeatures([FromUri] string subjectUID, [FromUri] string contextUID) {
 
@@ -50,7 +48,6 @@ namespace Empiria.Security.Management.WebApi {
 
 
     [HttpGet]
-    [Route("v4/onepoint/security/management/subjects/{subjectUID:guid}/contexts/{contextUID:guid}/roles")]
     [Route("v5/security/management/subjects/{subjectUID:guid}/contexts/{contextUID:guid}/roles")]
     public CollectionModel GetSubjectRoles([FromUri] string subjectUID, [FromUri] string contextUID) {
 
@@ -67,7 +64,6 @@ namespace Empiria.Security.Management.WebApi {
     #region Command apis
 
     [HttpPost]
-    [Route("v4/onepoint/security/management/subjects/{subjectUID:guid}/contexts/{contextUID:guid}")]
     [Route("v5/security/management/subjects/{subjectUID:guid}/contexts/{contextUID:guid}")]
     public CollectionModel AssignContextToSubject([FromUri] string subjectUID,
                                                   [FromUri] string contextUID) {
@@ -84,7 +80,6 @@ namespace Empiria.Security.Management.WebApi {
 
 
     [HttpPost]
-    [Route("v4/onepoint/security/management/subjects/{subjectUID:guid}/contexts/{contextUID:guid}/features/{featureUID}")]
     [Route("v5/security/management/subjects/{subjectUID:guid}/contexts/{contextUID:guid}/features/{featureUID}")]
     public CollectionModel AssignFeatureToSubject([FromUri] string subjectUID,
                                                   [FromUri] string contextUID,
@@ -102,7 +97,6 @@ namespace Empiria.Security.Management.WebApi {
 
 
     [HttpPost]
-    [Route("v4/onepoint/security/management/subjects/{subjectUID:guid}/contexts/{contextUID:guid}/roles/{roleUID:guid}")]
     [Route("v5/security/management/subjects/{subjectUID:guid}/contexts/{contextUID:guid}/roles/{roleUID:guid}")]
     public CollectionModel AssignRoleToSubject([FromUri] string subjectUID,
                                                [FromUri] string contextUID,
@@ -120,7 +114,6 @@ namespace Empiria.Security.Management.WebApi {
 
 
     [HttpDelete]
-    [Route("v4/onepoint/security/management/subjects/{subjectUID:guid}/contexts/{contextUID:guid}")]
     [Route("v5/security/management/subjects/{subjectUID:guid}/contexts/{contextUID:guid}")]
     public CollectionModel UnsassignSubjectContext([FromUri] string subjectUID,
                                                    [FromUri] string contextUID) {
@@ -137,7 +130,6 @@ namespace Empiria.Security.Management.WebApi {
 
 
     [HttpDelete]
-    [Route("v4/onepoint/security/management/subjects/{subjectUID:guid}/contexts/{contextUID:guid}/features/{featureUID}")]
     [Route("v5/security/management/subjects/{subjectUID:guid}/contexts/{contextUID:guid}/features/{featureUID}")]
     public CollectionModel UnassignSubjectFeature([FromUri] string subjectUID,
                                                   [FromUri] string contextUID,
@@ -155,7 +147,6 @@ namespace Empiria.Security.Management.WebApi {
 
 
     [HttpDelete]
-    [Route("v4/onepoint/security/management/subjects/{subjectUID:guid}/contexts/{contextUID:guid}/roles/{roleUID:guid}")]
     [Route("v5/security/management/subjects/{subjectUID:guid}/contexts/{contextUID:guid}/roles/{roleUID:guid}")]
     public CollectionModel UnassignSubjectRole([FromUri] string subjectUID,
                                                [FromUri] string contextUID,

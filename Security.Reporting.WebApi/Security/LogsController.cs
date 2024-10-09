@@ -21,7 +21,6 @@ namespace Empiria.Security.Reporting.WebApi {
     #region Web Apis
 
     [HttpPost]
-    [Route("v4/onepoint/security/management/operational-logs/excel")]
     [Route("v5/security/management/operational-logs/excel")]
     public SingleObjectModel ExportOperationalLogToExcel([FromBody] OperationalLogReportQuery query) {
 

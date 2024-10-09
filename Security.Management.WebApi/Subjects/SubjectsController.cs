@@ -23,7 +23,6 @@ namespace Empiria.Security.Management.WebApi {
     #region Query apis
 
     [HttpPost, AllowAnonymous]
-    [Route("v4/onepoint/security/management/new-credentials-token")]
     [Route("v5/security/management/new-credentials-token")]
     public SingleObjectModel GenerateNewCredentialsToken([FromBody] UserCredentialsDto credentials) {
 
@@ -38,7 +37,6 @@ namespace Empiria.Security.Management.WebApi {
 
 
     [HttpPost]
-    [Route("v4/onepoint/security/management/subjects/search")]
     [Route("v5/security/management/subjects/search")]
     public CollectionModel GetSubjects([FromBody] SubjectsQuery query) {
 
@@ -53,7 +51,6 @@ namespace Empiria.Security.Management.WebApi {
 
 
     [HttpGet]
-    [Route("v4/onepoint/security/management/subjects/workareas")]
     [Route("v5/security/management/subjects/workareas")]
     public CollectionModel GetWorkareas() {
 
@@ -69,7 +66,6 @@ namespace Empiria.Security.Management.WebApi {
     #region Command apis
 
     [HttpPost]
-    [Route("v4/onepoint/security/management/subjects/{subjectUID:guid}/activate")]
     [Route("v5/security/management/subjects/{subjectUID:guid}/activate")]
     public SingleObjectModel ActivateSubject([FromUri] string subjectUID) {
 
@@ -82,7 +78,6 @@ namespace Empiria.Security.Management.WebApi {
 
 
     [HttpPost]
-    [Route("v4/onepoint/security/management/subjects")]
     [Route("v5/security/management/subjects")]
     public SingleObjectModel CreateSubject([FromBody] SubjectFields fields) {
 
@@ -97,7 +92,6 @@ namespace Empiria.Security.Management.WebApi {
 
 
     [HttpDelete]
-    [Route("v4/onepoint/security/management/subjects/{subjectUID:guid}")]
     [Route("v5/security/management/subjects/{subjectUID:guid}")]
     public NoDataModel RemoveSubject([FromUri] string subjectUID) {
 
@@ -111,7 +105,6 @@ namespace Empiria.Security.Management.WebApi {
 
 
     [HttpPost]
-    [Route("v4/onepoint/security/management/subjects/{subjectUID:guid}/reset-credentials")]
     [Route("v5/security/management/subjects/{subjectUID:guid}/reset-credentials")]
     public NoDataModel ResetCredentials([FromUri] string subjectUID) {
 
@@ -124,7 +117,6 @@ namespace Empiria.Security.Management.WebApi {
 
 
     [HttpPost]
-    [Route("v4/onepoint/security/management/subjects/{subjectUID:guid}/suspend")]
     [Route("v5/security/management/subjects/{subjectUID:guid}/suspend")]
     public SingleObjectModel SuspendSubject([FromUri] string subjectUID) {
 
@@ -137,7 +129,6 @@ namespace Empiria.Security.Management.WebApi {
 
 
     [HttpPost, AllowAnonymous]
-    [Route("v4/onepoint/security/management/update-my-credentials")]
     [Route("v5/security/management/update-my-credentials")]
     public NoDataModel UpdateCredentials([FromBody] UpdateCredentialsFields fields) {
 
@@ -152,7 +143,6 @@ namespace Empiria.Security.Management.WebApi {
 
 
     [HttpPut, HttpPatch]
-    [Route("v4/onepoint/security/management/subjects/{subjectUID:guid}")]
     [Route("v5/security/management/subjects/{subjectUID:guid}")]
     public SingleObjectModel UpdateSubject([FromUri] string subjectUID,
                                            [FromBody] SubjectFields fields) {
@@ -184,7 +174,6 @@ namespace Empiria.Security.Management.WebApi {
       fields.AppKey = base.GetRequestHeader<string>("ApplicationKey");
       fields.UserHostAddress = base.GetClientIpAddress();
     }
-
 
     #endregion Helpers
 
