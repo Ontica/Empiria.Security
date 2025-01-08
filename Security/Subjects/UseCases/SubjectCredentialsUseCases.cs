@@ -87,7 +87,7 @@ namespace Empiria.Security.Subjects.UseCases {
       var editor = new SubjectSecurityItemsEditor(contact);
 
       Assertion.Require(editor.GetCredentialsStatus() == EntityStatus.Active,
-                        "La cuenta de acceso al sistema ha sido bloqueada (suspendida). Por motivos de seguridad, " +
+                        "La cuenta de acceso al sistema ha sido bloqueada. Por motivos de seguridad, " +
                         "no es posible actualizar la contraseña.");
 
       string newPassword = EncryptPassword(fields.UserID, Cryptographer.Decrypt(fields.NewPassword, entropy, true));
