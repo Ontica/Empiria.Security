@@ -183,50 +183,45 @@ namespace Empiria.Security {
 
 
     public bool HasDataAccessTo<T>(T entity) where T : IIdentifiable {
+      Type entityType = entity.GetType();
 
-      var rules = ObjectAccessRules.FindAll(x => x.TypeName == entity.GetType().Name &&
+      var rules = ObjectAccessRules.FindAll(x => x.TypeName == entityType.Name &&
                                                  x.ObjectsUIDs.Contains(entity.UID));
       if (rules.Count != 0) {
         return true;
       }
 
-      rules = ObjectAccessRules.FindAll(x => x.TypeName == entity.GetType().BaseType.Name &&
+      rules = ObjectAccessRules.FindAll(x => x.TypeName == entityType.BaseType.Name &&
                                              x.ObjectsUIDs.Contains(entity.UID));
       if (rules.Count != 0) {
         return true;
       }
 
-      rules = ObjectAccessRules.FindAll(x => x.TypeName == entity.GetType().BaseType.BaseType.Name &&
+      rules = ObjectAccessRules.FindAll(x => x.TypeName == entityType.BaseType.BaseType.Name &&
                                              x.ObjectsUIDs.Contains(entity.UID));
       if (rules.Count != 0) {
         return true;
       }
 
-      rules = ObjectAccessRules.FindAll(x => x.TypeName == entity.GetType().Name &&
+      rules = ObjectAccessRules.FindAll(x => x.TypeName == entityType.Name &&
                                             !x.ObjectsUIDs.Contains(entity.UID));
 
       if (rules.Count != 0) {
         return false;
       }
 
-      rules = ObjectAccessRules.FindAll(x => x.TypeName == entity.GetType().BaseType.Name &&
+      rules = ObjectAccessRules.FindAll(x => x.TypeName == entityType.BaseType.Name &&
                                             !x.ObjectsUIDs.Contains(entity.UID));
 
       if (rules.Count != 0) {
         return false;
       }
 
-      rules = ObjectAccessRules.FindAll(x => x.TypeName == entity.GetType().BaseType.BaseType.Name &&
+      rules = ObjectAccessRules.FindAll(x => x.TypeName == entityType.BaseType.BaseType.Name &&
                                             !x.ObjectsUIDs.Contains(entity.UID));
 
       if (rules.Count != 0) {
         return false;
-      }
-
-      // ToDo: Remove this hard-coded rule
-      if (entity.UID == "NivelacionCuentasCompraventa") {
-
-        return EmpiriaMath.IsMemberOf(ExecutionServer.CurrentUserId, new[] { 135, 1002, 1003, 2006, 3512, 3548 });
       }
 
       return true;
