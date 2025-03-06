@@ -7,7 +7,6 @@
 *  Summary  : Use cases for subject's assigned security items.                                               *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
-using System;
 
 using Empiria.Contacts;
 using Empiria.Security.Data;
@@ -38,11 +37,13 @@ namespace Empiria.Security.Subjects.UseCases {
       IIdentifiable subject = GetSubject(subjectUID);
       SecurityContext context = GetContext(contextUID);
 
-      var subjectSecurity = new SubjectSecurityItemsEditor(subject);
+      var securityEditor = new SubjectSecurityItemsEditor(subject);
 
-      subjectSecurity.AssignContext(context);
+      securityEditor.AssignContext(context);
 
       var subjectData = GetSubjectData(subjectUID);
+
+      EmpiriaPrincipal.CloseAllSessions(subject);
 
       EmpiriaLog.PermissionsLog(subjectData.Contact, "Alta de aplicación", context.Name);
     }
@@ -53,11 +54,13 @@ namespace Empiria.Security.Subjects.UseCases {
 
       var feature = Feature.Parse(featureUID);
 
-      SubjectSecurityItemsEditor subject = GetSubjectSecurityItemsEditor(subjectUID, contextUID);
+      SubjectSecurityItemsEditor securityEditor = GetSubjectSecurityItemsEditor(subjectUID, contextUID);
 
-      subject.AssignFeature(feature);
+      securityEditor.AssignFeature(feature);
 
       var subjectData = GetSubjectData(subjectUID);
+
+      EmpiriaPrincipal.CloseAllSessions(subjectData.Contact);
 
       EmpiriaLog.PermissionsLog(subjectData.Contact, "Alta de permiso", feature.Name);
     }
@@ -68,11 +71,13 @@ namespace Empiria.Security.Subjects.UseCases {
 
       var role = Role.Parse(roleUID);
 
-      SubjectSecurityItemsEditor subjectSecurity = GetSubjectSecurityItemsEditor(subjectUID, contextUID);
+      SubjectSecurityItemsEditor securityEditor = GetSubjectSecurityItemsEditor(subjectUID, contextUID);
 
-      subjectSecurity.AssignRole(role);
+      securityEditor.AssignRole(role);
 
       var subjectData = GetSubjectData(subjectUID);
+
+      EmpiriaPrincipal.CloseAllSessions(subjectData.Contact);
 
       EmpiriaLog.PermissionsLog(subjectData.Contact, "Alta de rol", role.Name);
     }
@@ -112,26 +117,27 @@ namespace Empiria.Security.Subjects.UseCases {
       IIdentifiable subject = GetSubject(subjectUID);
       SecurityContext context = GetContext(contextUID);
 
-      SubjectSecurityItemsEditor subjectSecurity = GetSubjectSecurityItemsEditor(subjectUID, contextUID);
+      SubjectSecurityItemsEditor securityEditor = GetSubjectSecurityItemsEditor(subjectUID, contextUID);
 
       FixedList<Role> roles = Role.GetSubjectRoles(subject, context);
 
       foreach (var role in roles) {
-        subjectSecurity.UnassignRole(role);
+        securityEditor.UnassignRole(role);
       }
 
       FixedList<Feature> features = Feature.GetSubjectFeatures(subject, context);
 
       foreach (var feature in features) {
-        subjectSecurity.UnassignFeature(feature);
+        securityEditor.UnassignFeature(feature);
       }
 
-      subjectSecurity.UnassignContext(context);
+      securityEditor.UnassignContext(context);
 
       var subjectData = GetSubjectData(subjectUID);
 
-      EmpiriaLog.PermissionsLog(subjectData.Contact, "Baja de aplicación", context.Name);
+      EmpiriaPrincipal.CloseAllSessions(subject);
 
+      EmpiriaLog.PermissionsLog(subjectData.Contact, "Baja de aplicación", context.Name);
     }
 
 
@@ -140,11 +146,13 @@ namespace Empiria.Security.Subjects.UseCases {
 
       var feature = Feature.Parse(featureUID);
 
-      SubjectSecurityItemsEditor subjectSecurity = GetSubjectSecurityItemsEditor(subjectUID, contextUID);
+      SubjectSecurityItemsEditor securityEditor = GetSubjectSecurityItemsEditor(subjectUID, contextUID);
 
       var subject = GetSubjectData(subjectUID);
 
-      subjectSecurity.UnassignFeature(feature);
+      securityEditor.UnassignFeature(feature);
+
+      EmpiriaPrincipal.CloseAllSessions(subject.Contact);
 
       EmpiriaLog.PermissionsLog(subject.Contact, "Baja de permiso", feature.Name);
     }
@@ -155,11 +163,13 @@ namespace Empiria.Security.Subjects.UseCases {
 
       var role = Role.Parse(roleUID);
 
-      SubjectSecurityItemsEditor subjectSecurity = GetSubjectSecurityItemsEditor(subjectUID, contextUID);
+      SubjectSecurityItemsEditor securityEditor = GetSubjectSecurityItemsEditor(subjectUID, contextUID);
 
       var subject = GetSubjectData(subjectUID);
 
-      subjectSecurity.UnassignRole(role);
+      securityEditor.UnassignRole(role);
+
+      EmpiriaPrincipal.CloseAllSessions(subject.Contact);
 
       EmpiriaLog.PermissionsLog(subject.Contact, "Baja de rol", role.Name);
     }

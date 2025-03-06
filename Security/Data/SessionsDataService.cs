@@ -10,7 +10,6 @@
 
 using System;
 
-using Empiria.Contacts;
 using Empiria.Data;
 
 namespace Empiria.Security.Data {
@@ -18,7 +17,7 @@ namespace Empiria.Security.Data {
   /// <summary>Empiria sessions data service.</summary>
   static internal class SessionsDataService {
 
-    static internal void CloseAllSessions(Contact user) {
+    static internal void CloseAllSessions(IIdentifiable user) {
       var op = DataOperation.Parse("doCloseAllUserSessions", user.Id, DateTime.Now);
 
       DataWriter.Execute(op);

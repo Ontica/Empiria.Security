@@ -95,7 +95,7 @@ namespace Empiria.Security {
     }
 
 
-    static internal void CloseAllSessions(Contact user) {
+    static internal void CloseAllSessions(IIdentifiable user) {
       principalsCache.Remove((x) => x.Identity.User.Contact.Id == user.Id);
 
       SessionsDataService.CloseAllSessions(user);
