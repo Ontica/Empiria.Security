@@ -19,6 +19,7 @@ namespace Empiria.Security.Data {
   static internal class SubjectsDataService {
 
     static private readonly bool USES_LEGACY_MH_PARTICIPANTS = ConfigurationData.Get("UsesLegacyMHParticipants", false);
+    static private readonly bool USES_PARTIES = ConfigurationData.Get("UsesParties", false);
 
     static internal SubjectData GetSubject(IIdentifiable contact) {
       string sql = "SELECT * FROM " +
@@ -103,6 +104,14 @@ namespace Empiria.Security.Data {
           new DateTime(2022, 01, 01), new DateTime(2049, 12, 31));
 
       DataWriter.Execute(op);
+    }
+
+    internal static void WriteAsParty() {
+      if (!USES_PARTIES) {
+        return;
+      }
+
+      DataWriter.Execute(DataOperation.Parse("apd_party_tmp", 1));
     }
 
     #endregion Legacy MhParticipants integration

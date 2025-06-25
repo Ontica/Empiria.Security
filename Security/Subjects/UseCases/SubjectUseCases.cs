@@ -84,7 +84,10 @@ namespace Empiria.Security.Subjects.UseCases {
 
       SubjectsDataService.WriteAsParticipant(subject);
 
+      SubjectsDataService.WriteAsParty();
+
       EmpiriaLog.UserManagementLog(subject.Contact, "Se dio de alta la cuenta de acceso al sistema");
+
 
       return SubjectMapper.Map(subject);
     }
