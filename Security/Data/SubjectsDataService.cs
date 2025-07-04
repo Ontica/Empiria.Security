@@ -64,7 +64,7 @@ namespace Empiria.Security.Data {
       string sql = "SELECT * FROM Contacts " +
                    "WHERE ContactTags LIKE '%systems-users-org%' AND " +
                    "ContactStatus <> 'X' " +
-                   "ORDER BY ContactFullName";
+                   "ORDER BY Initials, ContactFullName";
 
       return DataReader.GetFixedList<Organization>(DataOperation.Parse(sql));
     }
