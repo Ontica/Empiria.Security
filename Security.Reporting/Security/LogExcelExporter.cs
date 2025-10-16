@@ -75,8 +75,8 @@ namespace Empiria.Security.Reporting {
         excelFile.SetCell($"C{i}", entry.EmployeeID);
         excelFile.SetCell($"D{i}", entry.UserName);
         excelFile.SetCell($"E{i}", entry.UserHostAddress);
-        excelFile.SetCell($"F{i}", entry.Operation);
-        excelFile.SetCell($"G{i}", entry.Subject.FullName);
+        excelFile.SetCell($"F{i}", EmpiriaString.Clean(entry.Operation));
+        excelFile.SetCell($"G{i}", EmpiriaString.Clean(entry.Subject.FullName));
         excelFile.SetCell($"H{i}", entry.SubjectEmployeeID);
         i++;
       }
@@ -90,10 +90,10 @@ namespace Empiria.Security.Reporting {
         SetSessionCell(excelFile, $"B{i}", entry);
         excelFile.SetCell($"C{i}", entry.EmployeeID);
         excelFile.SetCell($"D{i}", entry.UserName);
-        excelFile.SetCell($"E{i}", entry.UserHostAddress);
-        excelFile.SetCell($"F{i}", entry.Operation);
-        excelFile.SetCell($"G{i}", entry.SubjectObject);
-        excelFile.SetCell($"H{i}", entry.Subject.FullName);
+        excelFile.SetCell($"E{i}", EmpiriaString.Clean(entry.UserHostAddress));
+        excelFile.SetCell($"F{i}", EmpiriaString.Clean(entry.Operation));
+        excelFile.SetCell($"G{i}", EmpiriaString.Clean(entry.SubjectObject));
+        excelFile.SetCell($"H{i}", EmpiriaString.Clean(entry.Subject.FullName));
         excelFile.SetCell($"I{i}", entry.SubjectEmployeeID);
         i++;
       }
@@ -107,10 +107,10 @@ namespace Empiria.Security.Reporting {
         SetSessionCell(excelFile, $"B{i}", entry);
         excelFile.SetCell($"C{i}", entry.EmployeeID);
         excelFile.SetCell($"D{i}", entry.UserName);
-        excelFile.SetCell($"E{i}", entry.UserHostAddress);
-        excelFile.SetCell($"F{i}", entry.Operation);
-        excelFile.SetCell($"G{i}", entry.Description);
-        excelFile.SetCell($"H{i}", entry.Exception);
+        excelFile.SetCell($"E{i}", EmpiriaString.Clean(entry.UserHostAddress));
+        excelFile.SetCell($"F{i}", EmpiriaString.Clean(entry.Operation));
+        excelFile.SetCell($"G{i}", EmpiriaString.Clean(entry.Description));
+        excelFile.SetCell($"H{i}", EmpiriaString.Clean(entry.Exception));
         i++;
       }
     }
@@ -123,9 +123,9 @@ namespace Empiria.Security.Reporting {
         SetSessionCell(excelFile, $"B{i}", entry);
         excelFile.SetCell($"C{i}", entry.EmployeeID);
         excelFile.SetCell($"D{i}", entry.UserName);
-        excelFile.SetCell($"E{i}", entry.UserHostAddress);
-        excelFile.SetCell($"F{i}", entry.Operation);
-        excelFile.SetCell($"G{i}", entry.Description);
+        excelFile.SetCell($"E{i}", EmpiriaString.Clean(entry.UserHostAddress));
+        excelFile.SetCell($"F{i}", EmpiriaString.Clean(entry.Operation));
+        excelFile.SetCell($"G{i}", EmpiriaString.Clean(entry.Description));
         i++;
       }
     }
@@ -140,7 +140,8 @@ namespace Empiria.Security.Reporting {
     private void SetHeader(ExcelFile excelFile) {
       excelFile.SetCell($"A2", _template.Title);
 
-      var subTitle = $"Del {_query.FromDate.ToString("dd/MMM/yyyy")} al {_query.ToDate.ToString("dd/MMM/yyyy")}";
+      var subTitle = $"Del {_query.FromDate.ToString("dd/MMM/yyyy")} " +
+                     $"al {_query.ToDate.ToString("dd/MMM/yyyy")}";
 
       excelFile.SetCell($"A3", subTitle);
     }
