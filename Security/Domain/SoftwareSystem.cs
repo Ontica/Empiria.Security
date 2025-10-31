@@ -7,7 +7,6 @@
 *  Summary  : Represents a software system.                                                                  *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
-using System;
 
 namespace Empiria.Security {
 
@@ -18,9 +17,7 @@ namespace Empiria.Security {
       // Required by Empiria Framework for all partitioned types.
     }
 
-    static public new SoftwareSystem Parse(int id) {
-      return BaseObject.ParseId<SoftwareSystem>(id);
-    }
+    static public new SoftwareSystem Parse(int id) => ParseId<SoftwareSystem>(id);
 
 
     public string Name {
@@ -28,7 +25,6 @@ namespace Empiria.Security {
         return ExtensionData.Get("systemName", base.BaseKey);
       }
     }
-
 
   } // class SoftwareSystem
 

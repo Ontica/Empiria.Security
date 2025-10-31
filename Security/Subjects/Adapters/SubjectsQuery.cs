@@ -7,7 +7,6 @@
 *  Summary  : Query input DTO used for security subjects searching.                                          *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
-using System;
 
 using Empiria.Contacts;
 
@@ -54,7 +53,6 @@ namespace Empiria.Security.Subjects.Adapters {
 
     #endregion Methods
 
-
     #region Helpers
 
     static private string BuildContextFilter(string contextUID) {
@@ -78,7 +76,7 @@ namespace Empiria.Security.Subjects.Adapters {
       }
 
       return SearchExpression.ParseAndLikeKeywords("contactkeywords", keywords);
-     }
+    }
 
 
     static private string BuildWorkareaFilter(string workareaUID) {

@@ -9,6 +9,7 @@
 *             authentication. SecurityItem is a partitioned type of SecurityItemType.                        *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
+
 using System;
 
 using Empiria.Contacts;
@@ -24,25 +25,21 @@ namespace Empiria.Security {
   [PartitionedType(typeof(SecurityItemType))]
   abstract internal class SecurityItem : BaseObject {
 
+    #region Constructors and parsers
+
     protected SecurityItem(SecurityItemType powerType) : base(powerType) {
       // Required by Empiria Framework for all partitioned types.
     }
 
-    static public SecurityItem Parse(int id) {
-      return BaseObject.ParseId<SecurityItem>(id);
-    }
+    static public SecurityItem Parse(int id) => ParseId<SecurityItem>(id);
 
-    static public T Parse<T>(int id) where T : SecurityItem {
-      return BaseObject.ParseId<T>(id);
-    }
+    static public T Parse<T>(int id) where T : SecurityItem => ParseId<T>(id);
 
+    static public T Parse<T>(string uid) where T : SecurityItem => ParseKey<T>(uid);
 
-    static public T Parse<T>(string uid) where T : SecurityItem {
-      return BaseObject.ParseKey<T>(uid);
-    }
+    static public SecurityItem Empty => ParseEmpty<SecurityItem>();
 
-    static public SecurityItem Empty => BaseObject.ParseEmpty<SecurityItem>();
-
+    #endregion Constructors and parsers
 
     #region Properties
 

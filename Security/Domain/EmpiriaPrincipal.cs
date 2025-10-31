@@ -9,17 +9,15 @@
 *             roles to which they belong. This class cannot be derived.                                      *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
+
 using System;
 using System.Linq;
-
 using System.Security.Principal;
 
-using Empiria.Contacts;
 using Empiria.Collections;
 
-using Empiria.Security.Providers;
-
 using Empiria.Security.Data;
+using Empiria.Security.Providers;
 
 namespace Empiria.Security {
 

@@ -7,7 +7,7 @@
 *  Summary  : Use cases for subject's management.                                                            *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
-using System;
+
 
 using Empiria.Contacts;
 using Empiria.Services;

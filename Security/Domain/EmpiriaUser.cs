@@ -41,7 +41,6 @@ namespace Empiria.Security {
       };
     }
 
-
     #endregion Constructors and parsers
 
     #region Authenticate methods

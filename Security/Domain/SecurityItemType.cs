@@ -7,7 +7,6 @@
 *  Summary  : Powertype used to describe security items.                                                     *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
-using System;
 
 using Empiria.Ontology;
 
@@ -24,14 +23,10 @@ namespace Empiria.Security {
     }
 
 
-    static public new SecurityItemType Parse(int typeId) {
-      return ObjectTypeInfo.Parse<SecurityItemType>(typeId);
-    }
+    static public new SecurityItemType Parse(int typeId) => Parse<SecurityItemType>(typeId);
 
 
-    static internal new SecurityItemType Parse(string typeName) {
-      return ObjectTypeInfo.Parse<SecurityItemType>(typeName);
-    }
+    static internal new SecurityItemType Parse(string typeName) => Parse<SecurityItemType>(typeName);
 
 
     static public SecurityItemType Empty => Parse("ObjectType.SecurityItem");

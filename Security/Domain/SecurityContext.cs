@@ -22,20 +22,13 @@ namespace Empiria.Security {
     }
 
 
-    static internal new SecurityContext Parse(int id) {
-      return BaseObject.ParseId<SecurityContext>(id);
-    }
+    static internal new SecurityContext Parse(int id) => ParseId<SecurityContext>(id);
 
-
-    static internal SecurityContext Parse(string uid) {
-      return BaseObject.ParseKey<SecurityContext>(uid);
-    }
-
+    static internal SecurityContext Parse(string uid) => ParseKey<SecurityContext>(uid);
 
     static internal SecurityContext ParseWith(IClientApplication clientApp) {
       return ((ClientApplication) clientApp).SecurityContext;
     }
-
 
     static internal FixedList<SecurityContext> GetList() {
       var list = SecurityItemsDataReader.GetSecurityItems<SecurityContext>(SecurityItemType.SecurityContext);
@@ -47,12 +40,12 @@ namespace Empiria.Security {
 
 
     static internal FixedList<SecurityContext> GetList(IIdentifiable subject) {
-      return SecurityItemsDataReader.GetSubjectTargetItems<SecurityContext>(subject, SecurityContext.Empty,
+      return SecurityItemsDataReader.GetSubjectTargetItems<SecurityContext>(subject, Empty,
                                                                             SecurityItemType.SubjectContext);
     }
 
 
-    static internal new SecurityContext Empty => BaseObject.ParseEmpty<SecurityContext>();
+    static internal new SecurityContext Empty => ParseEmpty<SecurityContext>();
 
     #endregion Constructors and parsers
 

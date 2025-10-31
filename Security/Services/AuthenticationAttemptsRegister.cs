@@ -7,7 +7,7 @@
 *  Summary  : Keeps a registry of user authentication attempts.                                              *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
-using System;
+
 using System.Collections.Generic;
 
 namespace Empiria.Security.Services {
@@ -16,7 +16,7 @@ namespace Empiria.Security.Services {
   internal class AuthenticationAttemptsRegister {
 
     static private int MAX_AUTHENTICATION_ATTEMPTS =
-                                    ConfigurationData.Get<int>("MaxAuthenticationAttempts", 5);
+                                    ConfigurationData.Get("MaxAuthenticationAttempts", 5);
 
     static private Dictionary<string, int> autenticationAttempts = new Dictionary<string, int>();
 

@@ -7,6 +7,7 @@
 *  Summary  : Sends email messages when something happens in the context of security-related operations.     *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
+
 using System.IO;
 
 using Empiria.Contacts;

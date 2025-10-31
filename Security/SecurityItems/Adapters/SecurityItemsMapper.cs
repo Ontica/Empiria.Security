@@ -7,7 +7,6 @@
 *  Summary  : Methods used to map security items.                                                            *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
-using System;
 
 namespace Empiria.Security.SecurityItems.Adapters {
 
@@ -29,6 +28,5 @@ namespace Empiria.Security.SecurityItems.Adapters {
     }
 
   }  // class SecurityItemsMapper
-
 
 }  // namespace Empiria.Security.Subjects.Adapters

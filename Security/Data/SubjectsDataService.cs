@@ -7,6 +7,7 @@
 *  Summary  : Data read and write methods for user management services.                                      *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
+
 using System;
 
 using Empiria.Contacts;

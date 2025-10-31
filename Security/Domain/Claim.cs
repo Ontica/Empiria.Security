@@ -8,7 +8,6 @@
 *             Subjects are users, applications, systems, services or computers.                              *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
-using System;
 
 using Empiria.Security.Data;
 
@@ -25,10 +24,7 @@ namespace Empiria.Security {
     }
 
 
-    static internal new Claim Parse(int id) {
-      return BaseObject.ParseId<Claim>(id);
-    }
-
+    static internal new Claim Parse(int id) => ParseId<Claim>(id);
 
     static internal Claim TryParse(SecurityItemType claimType, int subjectId) {
 
@@ -42,7 +38,6 @@ namespace Empiria.Security {
       return SecurityItemsDataReader.TryGetSubjectItemWithKey<Claim>(SecurityContext.Empty, claimType,
                                                                      securityKey);
     }
-
 
     #endregion Constructors and parsers
 

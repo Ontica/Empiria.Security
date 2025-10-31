@@ -14,8 +14,8 @@ using Empiria.Services;
 using Empiria.StateEnums;
 
 using Empiria.Security.Data;
-
 using Empiria.Security.Providers;
+
 using Empiria.Security.Subjects.Adapters;
 
 namespace Empiria.Security.Subjects.UseCases {

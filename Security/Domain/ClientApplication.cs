@@ -22,22 +22,20 @@ namespace Empiria.Security {
     }
 
 
-    static internal new ClientApplication Parse(int id) {
-      return BaseObject.ParseId<ClientApplication>(id);
-    }
+    static internal new ClientApplication Parse(int id) => ParseId<ClientApplication>(id);
 
 
     static public ClientApplication TryParse(string clientAppKey) {
       Assertion.Require(clientAppKey, "clientAppKey");
 
-      return BaseObject.TryParse<ClientApplication>($"SecurityItemKey = '{clientAppKey}'");
+      return TryParse<ClientApplication>($"SecurityItemKey = '{clientAppKey}'");
     }
 
 
     static public ClientApplication ParseActive(string clientAppKey) {
       Assertion.Require(clientAppKey, "clientAppKey");
 
-      var app = BaseObject.ParseKey<ClientApplication>($"SecurityItemKey = '{clientAppKey}'");
+      var app = ParseKey<ClientApplication>($"SecurityItemKey = '{clientAppKey}'");
 
       Assertion.Require(app.Status == StateEnums.EntityStatus.Active,
                         "Client application is not active");
@@ -46,10 +44,9 @@ namespace Empiria.Security {
     }
 
 
-    public static void AssertIsActive(string appKey) {
-      ClientApplication.ParseActive(appKey);
+    static public void AssertIsActive(string appKey) {
+      ParseActive(appKey);
     }
-
 
     #endregion Constructors and parsers
 

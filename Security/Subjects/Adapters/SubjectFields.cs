@@ -7,6 +7,7 @@
 *  Summary  : Input data transfer object for subject information.                                            *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
+
 using Empiria.Contacts;
 
 namespace Empiria.Security.Subjects.Adapters {

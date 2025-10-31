@@ -7,6 +7,7 @@
 *  Summary  : Provides services for subject's security items edition.                                        *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
+
 using System;
 
 using Empiria.StateEnums;

@@ -36,20 +36,6 @@ namespace Empiria.Security.Management.WebApi {
     }
 
 
-    [HttpPost]
-    [Route("v5/security/management/subjects/search")]
-    public CollectionModel GetSubjects([FromBody] SubjectsQuery query) {
-
-      RequireBody(query);
-
-      using (var usecases = SubjectUseCases.UseCaseInteractor()) {
-        FixedList<SubjectDto> subjects = usecases.SearchSubjects(query);
-
-        return new CollectionModel(base.Request, subjects);
-      }
-    }
-
-
     [HttpGet]
     [Route("v5/security/management/subjects/workareas")]
     public CollectionModel GetWorkareas() {
@@ -58,6 +44,20 @@ namespace Empiria.Security.Management.WebApi {
         FixedList<NamedEntityDto> workareas = usecases.Workareas();
 
         return new CollectionModel(base.Request, workareas);
+      }
+    }
+
+
+    [HttpPost]
+    [Route("v5/security/management/subjects/search")]
+    public CollectionModel SearchSubjects([FromBody] SubjectsQuery query) {
+
+      RequireBody(query);
+
+      using (var usecases = SubjectUseCases.UseCaseInteractor()) {
+        FixedList<SubjectDto> subjects = usecases.SearchSubjects(query);
+
+        return new CollectionModel(base.Request, subjects);
       }
     }
 
@@ -101,7 +101,6 @@ namespace Empiria.Security.Management.WebApi {
         return new NoDataModel(base.Request);
       }
     }
-
 
 
     [HttpPost]
@@ -167,6 +166,7 @@ namespace Empiria.Security.Management.WebApi {
       credentials.AppKey = base.GetRequestHeader<string>("ApplicationKey");
       credentials.UserHostAddress = base.GetClientIpAddress();
     }
+
 
     private void PrepareUpdateCredentialsFields(UpdateCredentialsFields fields) {
       base.RequireBody(fields);

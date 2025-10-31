@@ -7,6 +7,7 @@
 *  Summary  : Holds data about a security item.                                                              *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
+
 using System;
 
 using Empiria.Json;
@@ -32,11 +33,12 @@ namespace Empiria.Security {
       Assertion.Require(subject, nameof(subject));
       Assertion.Require(target, nameof(target));
 
-      this.SecurityItemType = itemType;
-      this.ContextId = context.Id;
-      this.SubjectId = subject.Id;
-      this.TargetId = target.Id;
+      SecurityItemType = itemType;
+      ContextId = context.Id;
+      SubjectId = subject.Id;
+      TargetId = target.Id;
     }
+
 
     static internal SecurityItemData Parse(SecurityItemType itemType,
                                            SecurityContext context,

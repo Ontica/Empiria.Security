@@ -40,7 +40,7 @@ namespace Empiria.Tests.Security {
     #region Facts
 
     [Fact]
-    public void Should_Active_A_Subject() {
+    public void Should_Activate_A_Subject() {
 
       SubjectDto sut = _usecases.ActivateSubject(TestingConstants.SUBJECT_UID);
 

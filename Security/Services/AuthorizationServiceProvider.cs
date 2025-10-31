@@ -18,7 +18,7 @@ namespace Empiria.Security.Services {
   internal class AuthorizationServiceProvider : IAuthorizationProvider {
 
     public FixedList<string> GetFeaturesPermissions(EmpiriaIdentity subject,
-                                                      IClientApplication clientApp) {
+                                                    IClientApplication clientApp) {
       Assertion.Require(subject, nameof(subject));
       Assertion.Require(clientApp, nameof(clientApp));
 
@@ -33,7 +33,7 @@ namespace Empiria.Security.Services {
 
 
     public FixedList<IObjectAccessRule> GetObjectAccessRules(EmpiriaIdentity subject,
-                                                               IClientApplication clientApp) {
+                                                             IClientApplication clientApp) {
       Assertion.Require(subject, nameof(subject));
       Assertion.Require(clientApp, nameof(clientApp));
 
@@ -48,7 +48,7 @@ namespace Empiria.Security.Services {
 
 
     public FixedList<string> GetRoles(EmpiriaIdentity subject,
-                                        IClientApplication clientApp) {
+                                      IClientApplication clientApp) {
       Assertion.Require(subject, nameof(subject));
       Assertion.Require(clientApp, nameof(clientApp));
 

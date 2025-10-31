@@ -7,7 +7,6 @@
 *  Summary  : Holds information about an object access permission rule.                                      *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
-using System;
 
 using Empiria.Json;
 
@@ -20,8 +19,8 @@ namespace Empiria.Security {
 
     static internal ObjectAccessRule Parse(JsonObject data) {
       return new ObjectAccessRule {
-       TypeName = data.Get<string>("typeName"),
-       ObjectsUIDs = data.GetList<string>("uids").ToFixedList()
+        TypeName = data.Get<string>("typeName"),
+        ObjectsUIDs = data.GetList<string>("uids").ToFixedList()
       };
     }
 

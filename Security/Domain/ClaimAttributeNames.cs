@@ -7,7 +7,6 @@
 *  Summary  : Static class that provides a set of claim attributes constant names.                           *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
-using System;
 
 namespace Empiria.Security {
 

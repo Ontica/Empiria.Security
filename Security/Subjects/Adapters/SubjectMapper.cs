@@ -7,7 +7,6 @@
 *  Summary  : Mapper for subject instances.                                                                  *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
-using System;
 
 using Empiria.StateEnums;
 

@@ -7,7 +7,6 @@
 *  Summary  : Represents an identity role that holds feature access permissions.                             *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
-using System;
 
 using Empiria.Security.Data;
 
@@ -23,14 +22,9 @@ namespace Empiria.Security {
     }
 
 
-    static internal new Role Parse(int id) {
-      return BaseObject.ParseId<Role>(id);
-    }
+    static internal new Role Parse(int id) => ParseId<Role>(id);
 
-
-    static internal Role Parse(string uid) {
-      return BaseObject.ParseKey<Role>(uid);
-    }
+    static internal Role Parse(string uid) => ParseKey<Role>(uid);
 
 
     static internal FixedList<Role> GetList(SoftwareSystem softwareSystem) {

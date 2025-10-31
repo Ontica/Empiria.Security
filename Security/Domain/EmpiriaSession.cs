@@ -47,6 +47,7 @@ namespace Empiria.Security {
 
 
     static internal IEmpiriaSession ParseActive(string sessionToken) {
+      Assertion.Require(sessionToken, nameof(sessionToken));
 
       EmpiriaSession session = SessionsDataService.GetSession(sessionToken);
 

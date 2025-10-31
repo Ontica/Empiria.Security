@@ -7,7 +7,6 @@
 *  Summary  : Holds information about a system feature.                                                      *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
-using System;
 
 using Empiria.Security.Data;
 
@@ -18,24 +17,22 @@ namespace Empiria.Security {
 
     #region Constructors and parsers
 
-    private Feature(SecurityItemType powerType) : base(powerType) {
+    protected Feature(SecurityItemType powerType) : base(powerType) {
       // Required by Empiria Framework for all partitioned types.
     }
 
 
-    static internal new Feature Parse(int id) {
-      return BaseObject.ParseId<Feature>(id);
-    }
+    static internal new Feature Parse(int id) => ParseId<Feature>(id);
 
 
     static internal Feature Parse(string featureKey) {
-      var feature = BaseObject.TryParse<Feature>($"SecurityItemKey = '{featureKey}'");
+      var feature = TryParse<Feature>($"SecurityItemKey = '{featureKey}'");
 
       if (feature != null) {
         return feature;
       }
 
-      return Feature.Empty;
+      return Empty;
     }
 
 

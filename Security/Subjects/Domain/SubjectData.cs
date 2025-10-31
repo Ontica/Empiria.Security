@@ -7,6 +7,7 @@
 *  Summary  : Holds subject's data.                                                                          *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
+
 using System;
 
 using Empiria.StateEnums;
