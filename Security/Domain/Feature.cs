@@ -73,7 +73,7 @@ namespace Empiria.Security {
 
     public bool IsAssignable {
       get {
-        return ExtensionData.Get("assignable", true);
+        return ExtensionData.Get("assignable", false);
       }
     }
 
