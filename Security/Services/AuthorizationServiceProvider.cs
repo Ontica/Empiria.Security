@@ -64,6 +64,15 @@ namespace Empiria.Security.Services {
     }
 
 
+    public bool IsSubjectActive(IIdentifiable subject) {
+      Assertion.Require(subject, nameof(subject));
+
+      SubjectData subjectData = SubjectsDataService.GetSubject(subject);
+
+      return subjectData.Status == StateEnums.EntityStatus.Active;
+    }
+
+
     public bool IsSubjectInRole(IIdentifiable subject, IClientApplication clientApp, string role) {
       Assertion.Require(subject, nameof(subject));
       Assertion.Require(clientApp, nameof(clientApp));
@@ -71,9 +80,7 @@ namespace Empiria.Security.Services {
 
       var context = DetermineSecurityContext(clientApp);
 
-      SubjectData subjectData = SubjectsDataService.GetSubject(subject);
-
-      if (subjectData.Status != StateEnums.EntityStatus.Active) {
+      if (!IsSubjectActive(subject)) {
         return false;
       }
 
@@ -85,6 +92,7 @@ namespace Empiria.Security.Services {
     private SecurityContext DetermineSecurityContext(IClientApplication clientApp) {
       return SecurityContext.ParseWith(clientApp);
     }
+
 
     private IObjectAccessRule MapToObjectAccessRulesDto(ObjectAccessRule rule) {
       return new ObjectAccessRuleDto {
