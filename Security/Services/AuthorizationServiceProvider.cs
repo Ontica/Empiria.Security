@@ -8,7 +8,9 @@
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
+using Empiria.Security.Data;
 using Empiria.Security.Providers;
+using Empiria.Security.Subjects;
 
 using Empiria.Security.SecurityItems.Adapters;
 
@@ -68,6 +70,12 @@ namespace Empiria.Security.Services {
       Assertion.Require(role, nameof(role));
 
       var context = DetermineSecurityContext(clientApp);
+
+      SubjectData subjectData = SubjectsDataService.GetSubject(subject);
+
+      if (subjectData.Status != StateEnums.EntityStatus.Active) {
+        return false;
+      }
 
       return Role.IsSubjectInRole(subject, context, role);
     }
