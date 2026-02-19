@@ -67,7 +67,11 @@ namespace Empiria.Security.Services {
     public bool IsSubjectActive(IIdentifiable subject) {
       Assertion.Require(subject, nameof(subject));
 
-      SubjectData subjectData = SubjectsDataService.GetSubject(subject);
+      SubjectData subjectData = SubjectsDataService.TryGetSubject(subject);
+
+      if (subjectData == null) {
+        return false;
+      }
 
       return subjectData.Status == StateEnums.EntityStatus.Active;
     }

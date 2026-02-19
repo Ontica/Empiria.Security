@@ -23,13 +23,12 @@ namespace Empiria.Security.Data {
     static private readonly bool USES_PARTIES = ConfigurationData.Get("UsesParties", false);
 
     static internal SubjectData GetSubject(IIdentifiable contact) {
-      string sql = "SELECT * FROM " +
-                   "SecurityItems INNER JOIN Contacts " +
-                   "ON SecurityItems.SubjectId = Contacts.ContactId " +
-                   $"WHERE SecurityItemTypeId = {SecurityItemType.SubjectCredentials.Id} AND " +
-                   $"SubjectId = {contact.Id}";
+      SubjectData subjectData = TryGetSubject(contact);
 
-      return DataReader.GetPlainObject<SubjectData>(DataOperation.Parse(sql));
+
+      Assertion.Require(subjectData, $"A subject with Id was not found.");
+
+      return subjectData;
     }
 
 
@@ -47,6 +46,17 @@ namespace Empiria.Security.Data {
       sql += $" ORDER BY ContactFullName";
 
       return DataReader.GetPlainObjectFixedList<SubjectData>(DataOperation.Parse(sql));
+    }
+
+
+    static internal SubjectData TryGetSubject(IIdentifiable contact) {
+      string sql = "SELECT * FROM " +
+             "SecurityItems INNER JOIN Contacts " +
+             "ON SecurityItems.SubjectId = Contacts.ContactId " +
+             $"WHERE SecurityItemTypeId = {SecurityItemType.SubjectCredentials.Id} AND " +
+             $"SubjectId = {contact.Id}";
+
+      return DataReader.GetPlainObject<SubjectData>(DataOperation.Parse(sql), null);
     }
 
 
