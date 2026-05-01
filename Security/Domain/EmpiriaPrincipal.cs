@@ -183,42 +183,25 @@ namespace Empiria.Security {
     public bool HasDataAccessTo<T>(T entity) where T : IIdentifiable {
       Type entityType = entity.GetType();
 
-      var rules = ObjectAccessRules.FindAll(x => x.TypeName == entityType.Name &&
-                                                 x.ObjectsUIDs.Contains(entity.UID));
+      FixedList<IObjectAccessRule> rules = GetObjectAccessRulesFor(entity, entityType.Name);
+
       if (rules.Count != 0) {
         return true;
       }
 
-      rules = ObjectAccessRules.FindAll(x => x.TypeName == entityType.BaseType.Name &&
-                                             x.ObjectsUIDs.Contains(entity.UID));
+      rules = GetObjectAccessRulesFor(entity, entityType.BaseType.Name);
+
       if (rules.Count != 0) {
         return true;
       }
 
-      rules = ObjectAccessRules.FindAll(x => x.TypeName == entityType.BaseType.BaseType.Name &&
-                                             x.ObjectsUIDs.Contains(entity.UID));
+      rules = GetObjectAccessRulesFor(entity, entityType.BaseType.BaseType.Name);
+
       if (rules.Count != 0) {
         return true;
       }
 
-      rules = ObjectAccessRules.FindAll(x => x.TypeName == entityType.Name &&
-                                            !x.ObjectsUIDs.Contains(entity.UID));
-
-      if (rules.Count != 0) {
-        return false;
-      }
-
-      rules = ObjectAccessRules.FindAll(x => x.TypeName == entityType.BaseType.Name &&
-                                            !x.ObjectsUIDs.Contains(entity.UID));
-
-      if (rules.Count != 0) {
-        return false;
-      }
-
-      rules = ObjectAccessRules.FindAll(x => x.TypeName == entityType.BaseType.BaseType.Name &&
-                                            !x.ObjectsUIDs.Contains(entity.UID));
-
-      if (rules.Count != 0) {
+      if (HasObjectAccessRules(entityType)) {
         return false;
       }
 
@@ -243,6 +226,23 @@ namespace Empiria.Security {
     #endregion Methods
 
     #region Helpers
+
+    private FixedList<IObjectAccessRule> GetObjectAccessRulesFor<T>(T entity, string typeName) where T : IIdentifiable {
+
+      return ObjectAccessRules.FindAll(x => x.TypeName == typeName &&
+                                            (x.ObjectsUIDs.Contains(entity.UID) ||
+                                             x.ObjectsUIDs.Contains(entity.Id.ToString())));
+
+    }
+
+
+    private bool HasObjectAccessRules(Type entityType) {
+      return ObjectAccessRules.Contains(x => x.TypeName == entityType.Name ||
+                                             x.TypeName == entityType.BaseType.Name ||
+                                             x.TypeName == entityType.BaseType.BaseType.Name);
+
+    }
+
 
     private void Initialize(EmpiriaIdentity identity, IClientApplication clientApp,
                             IUserCredentials credentials) {
