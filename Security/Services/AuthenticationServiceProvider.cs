@@ -20,7 +20,7 @@ using Empiria.Security.Subjects;
 namespace Empiria.Security.Services {
 
   /// <summary>Provides user authentication services.</summary>
-  internal class AuthenticationServiceProvider: IAuthenticationProvider {
+  internal class AuthenticationServiceProvider : IAuthenticationProvider {
 
     #region Services
 
@@ -141,9 +141,7 @@ namespace Empiria.Security.Services {
 
       var storedPassword = claim.GetAttribute<string>(ClaimAttributeNames.Password);
 
-      string decryptedPassword = DecryptPassword(userID, storedPassword, entropy);
-
-      if (decryptedPassword == password) {
+      if (DecryptPassword(userID, storedPassword, entropy) == password) {
 
         AuthenticationAttemptsRegister.Remove(userID);
 
@@ -156,13 +154,11 @@ namespace Empiria.Security.Services {
 
       if (AuthenticationAttemptsRegister.MaxAttemptsReached(userID)) {
         throw SuspendUserAccount(claim);
-      } else {
-
-
-        EmpiriaLog.FailedOperationLog(contact, "Authentication", "La contraseña proporcionada no es correcta.");
-
-        throw new SecurityException(SecurityException.Msg.InvalidUserCredentials);
       }
+
+      EmpiriaLog.FailedOperationLog(contact, "Authentication", "La contraseña proporcionada no es correcta.");
+
+      throw new SecurityException(SecurityException.Msg.InvalidUserCredentials);
     }
 
     #endregion Services
