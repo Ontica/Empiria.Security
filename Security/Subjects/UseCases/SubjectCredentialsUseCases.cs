@@ -43,6 +43,9 @@ namespace Empiria.Security.Subjects.UseCases {
     public void ResetCredentials(string contactUID) {
       Assertion.Require(contactUID, nameof(contactUID));
 
+      Assertion.Require(ExecutionServer.CurrentPrincipal.HasPermission("feature-edicion-control-de-accesos"),
+        "No tiene permiso para restablecer las credenciales.");
+
       var contact = Contact.Parse(contactUID);
 
       SubjectData subject = SubjectsDataService.GetSubject(contact);

@@ -39,6 +39,8 @@ namespace Empiria.Security.Subjects.UseCases {
     public SubjectDto ActivateSubject(string subjectUID) {
       Assertion.Require(subjectUID, nameof(subjectUID));
 
+      Assertion.Require(HasPermission(), "No tiene permisos para reactivar cuentas de acceso al sistema.");
+
       var contact = Contact.Parse(subjectUID);
 
       contact.ChangeStatus(EntityStatus.Active);
@@ -59,6 +61,8 @@ namespace Empiria.Security.Subjects.UseCases {
 
     public SubjectDto CreateSubject(SubjectFields fields) {
       Assertion.Require(fields, nameof(fields));
+
+      Assertion.Require(HasPermission(), "No tiene permisos para crear cuentas de acceso al sistema.");
 
       fields.EnsureValid();
 
@@ -96,6 +100,8 @@ namespace Empiria.Security.Subjects.UseCases {
     public void RemoveSubject(string subjectUID) {
       Assertion.Require(subjectUID, nameof(subjectUID));
 
+      Assertion.Require(HasPermission(), "No tiene permisos para eliminar cuentas de acceso al sistema.");
+
       var contact = Contact.Parse(subjectUID);
 
       contact.ChangeStatus(EntityStatus.Deleted);
@@ -115,6 +121,8 @@ namespace Empiria.Security.Subjects.UseCases {
     public FixedList<SubjectDto> SearchSubjects(SubjectsQuery query) {
       Assertion.Require(query, nameof(query));
 
+      Assertion.Require(HasPermission(), "No tiene permisos para buscar cuentas de acceso al sistema.");
+
       string filter = query.MapToFilterString();
 
       FixedList<SubjectData> users = SubjectsDataService.SearchSubjects(filter);
@@ -125,6 +133,8 @@ namespace Empiria.Security.Subjects.UseCases {
 
     public SubjectDto SuspendSubject(string subjectUID) {
       Assertion.Require(subjectUID, nameof(subjectUID));
+
+      Assertion.Require(HasPermission(), "No tiene permisos para suspender cuentas de acceso al sistema.");
 
       var contact = Contact.Parse(subjectUID);
 
@@ -151,6 +161,8 @@ namespace Empiria.Security.Subjects.UseCases {
       Assertion.Require(fields, nameof(fields));
 
       fields.EnsureValid();
+
+      Assertion.Require(HasPermission(), "No tiene permisos para modificar cuentas de acceso al sistema.");
 
       PersonFields personFields = MapToPersonFields(fields);
 
@@ -179,6 +191,11 @@ namespace Empiria.Security.Subjects.UseCases {
     #endregion Use cases
 
     #region Helpers
+
+    private bool HasPermission() {
+      return ExecutionServer.CurrentPrincipal.HasPermission("feature-edicion-control-de-accesos");
+    }
+
 
     private PersonFields MapToPersonFields(SubjectFields fields) {
       return new PersonFields {

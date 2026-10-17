@@ -37,6 +37,8 @@ namespace Empiria.Security.Subjects.UseCases {
       IIdentifiable subject = GetSubject(subjectUID);
       SecurityContext context = GetContext(contextUID);
 
+      Assertion.Require(HasPermission(), "No tiene permiso para asignar contextos.");
+
       var securityEditor = new SubjectSecurityItemsEditor(subject);
 
       securityEditor.AssignContext(context);
@@ -51,6 +53,8 @@ namespace Empiria.Security.Subjects.UseCases {
 
     public void AssignFeature(string subjectUID, string contextUID, string featureUID) {
       Assertion.Require(featureUID, nameof(featureUID));
+
+      Assertion.Require(HasPermission(), "No tiene permiso para asignar permisos.");
 
       var feature = Feature.Parse(featureUID);
 
@@ -68,6 +72,8 @@ namespace Empiria.Security.Subjects.UseCases {
 
     public void AssignRole(string subjectUID, string contextUID, string roleUID) {
       Assertion.Require(roleUID, nameof(roleUID));
+
+      Assertion.Require(HasPermission(), "No tiene permiso para asignar roles.");
 
       var role = Role.Parse(roleUID);
 
@@ -117,6 +123,8 @@ namespace Empiria.Security.Subjects.UseCases {
       IIdentifiable subject = GetSubject(subjectUID);
       SecurityContext context = GetContext(contextUID);
 
+      Assertion.Require(HasPermission(), "No tiene permiso para desasignar contextos.");
+
       SubjectSecurityItemsEditor securityEditor = GetSubjectSecurityItemsEditor(subjectUID, contextUID);
 
       FixedList<Role> roles = Role.GetSubjectRoles(subject, context);
@@ -144,6 +152,8 @@ namespace Empiria.Security.Subjects.UseCases {
     public void UnassignFeature(string subjectUID, string contextUID, string featureUID) {
       Assertion.Require(featureUID, nameof(featureUID));
 
+      Assertion.Require(HasPermission(), "No tiene permiso para desasignar permisos.");
+
       var feature = Feature.Parse(featureUID);
 
       SubjectSecurityItemsEditor securityEditor = GetSubjectSecurityItemsEditor(subjectUID, contextUID);
@@ -160,6 +170,8 @@ namespace Empiria.Security.Subjects.UseCases {
 
     public void UnassignRole(string subjectUID, string contextUID, string roleUID) {
       Assertion.Require(roleUID, nameof(roleUID));
+
+      Assertion.Require(HasPermission(), "No tiene permiso para desasignar roles.");
 
       var role = Role.Parse(roleUID);
 
@@ -191,6 +203,7 @@ namespace Empiria.Security.Subjects.UseCases {
       return Contact.Parse(subjectUID);
     }
 
+
     private SubjectData GetSubjectData(string subjectUID) {
       Assertion.Require(subjectUID, nameof(subjectUID));
 
@@ -199,12 +212,18 @@ namespace Empiria.Security.Subjects.UseCases {
       return SubjectsDataService.GetSubject(contact);
     }
 
+
     private SubjectSecurityItemsEditor GetSubjectSecurityItemsEditor(string subjectUID,
                                                                      string contextUID) {
       IIdentifiable subject = GetSubject(subjectUID);
       SecurityContext context = GetContext(contextUID);
 
       return new SubjectSecurityItemsEditor(subject, context);
+    }
+
+
+    private bool HasPermission() {
+      return ExecutionServer.CurrentPrincipal.HasPermission("feature-edicion-control-de-accesos");
     }
 
     #endregion Helpers
