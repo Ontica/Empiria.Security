@@ -45,29 +45,42 @@ namespace Empiria.Security.Data {
 
       sql += $" ORDER BY ContactFullName";
 
-      return DataReader.GetPlainObjectFixedList<SubjectData>(DataOperation.Parse(sql));
+      var op = DataOperation.Parse(sql);
+
+      return DataReader.GetPlainObjectFixedList<SubjectData>(op);
     }
 
 
     static internal SubjectData TryGetSubject(IIdentifiable contact) {
-      string sql = "SELECT * FROM " +
-             "SecurityItems INNER JOIN Contacts " +
-             "ON SecurityItems.SubjectId = Contacts.ContactId " +
-             $"WHERE SecurityItemTypeId = {SecurityItemType.SubjectCredentials.Id} AND " +
-             $"SubjectId = {contact.Id}";
 
-      return DataReader.GetPlainObject<SubjectData>(DataOperation.Parse(sql), null);
+      string sql = "SELECT * FROM " +
+                   "SecurityItems INNER JOIN Contacts " +
+                   "ON SecurityItems.SubjectId = Contacts.ContactId " +
+                   $"WHERE SecurityItemTypeId = {SecurityItemType.SubjectCredentials.Id} AND " +
+                   $"SubjectId = {contact.Id}";
+
+      var op = DataOperation.Parse(sql);
+
+      return DataReader.GetPlainObject<SubjectData>(op, null);
     }
 
 
     static internal SubjectData TryGetSubjectWithUserID(string userID) {
+
+      Assertion.Require(userID, nameof(userID));
+
+      EmpiriaString.EnsureIsSafe(userID, "Unsafe userID");
+      Assertion.Require(!userID.Contains("'"), "The userID must not contain quotes.");
+
       string sql = "SELECT * FROM " +
                    "SecurityItems INNER JOIN Contacts " +
                    "ON SecurityItems.SubjectId = Contacts.ContactId " +
                   $"WHERE SecurityItemTypeId = {SecurityItemType.SubjectCredentials.Id} AND " +
                   $"LOWER(SecurityItemKey) = '{userID.ToLower()}'";
 
-      return DataReader.GetPlainObject<SubjectData>(DataOperation.Parse(sql), null);
+      var op = DataOperation.Parse(sql);
+
+      return DataReader.GetPlainObject<SubjectData>(op, null);
     }
 
 
@@ -77,13 +90,16 @@ namespace Empiria.Security.Data {
                    "ContactStatus <> 'X' " +
                    "ORDER BY Initials, ContactFullName";
 
-      return DataReader.GetFixedList<Organization>(DataOperation.Parse(sql));
+      var op = DataOperation.Parse(sql);
+
+      return DataReader.GetFixedList<Organization>(op);
     }
 
 
     #region Legacy MhParticipants integration
 
     static internal int TryGetFormerParticipantId(string userID) {
+
       if (!USES_LEGACY_MH_PARTICIPANTS) {
         return 0;
       }
@@ -91,11 +107,16 @@ namespace Empiria.Security.Data {
       var formerUserID = userID.Length <= 24 ?
                          userID : userID.Substring(0, 24);
 
+      EmpiriaString.EnsureIsSafe(formerUserID, "Unsafe formerUserID");
+      Assertion.Require(!formerUserID.Contains("'"), "The formerUserID must not contain quotes.");
+
       string sql = "SELECT ParticipantId " +
                    "FROM MHParticipants " +
                   $"WHERE LOWER(ParticipantKey) = '{formerUserID.ToLower()}'";
 
-      return Convert.ToInt32(DataReader.GetScalar<long>(DataOperation.Parse(sql), 0));
+      var op = DataOperation.Parse(sql);
+
+      return Convert.ToInt32(DataReader.GetScalar<long>(op, 0));
     }
 
 
